@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="chinese &amp; english">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="ETHEREUM PET SHOP本文翻译至：https://truffleframework.com/tutorials/pet-shop 版本为：2017-07-20
+本教程将构建一个名为 “宠物商店追踪系统” 的 dapp
+本教程需要对以太坊和智能合约有一定的基础，了解 Html 和 Java">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="qiubing">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="ETHEREUM PET SHOP">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="ETHEREUM PET SHOP本文翻译至：https://truffleframework.com/tutorials/pet-shop 版本为：2017-07-20
+本教程将构建一个名为 “宠物商店追踪系统” 的 dapp
+本教程需要对以太坊和智能合约有一定的基础，了解 Html 和 Java">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Sulenn">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://github.com/sulenn/sulenn.github.io/img/5.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://github.com/sulenn/sulenn.github.io/img/5.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>ETHEREUM PET SHOP - Sulenn</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+  
+</head>
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">qiubing</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            
+                                about
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/sulenn/sulenn.github.io">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('../../../../img/7.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>ETHEREUM PET SHOP</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                            Posted by sulenn on
+                        
+                        
+                            2019-01-28
+                        
+                        <!-- <span id="busuanzi_container_page_pv">with Reading <span id="busuanzi_value_page_pv"></span></span> -->
+                    </span>
+                    <span class="meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/ethereum/">#ethereum</a> <a href="/tags/solidity/">#solidity</a> <a href="/tags/html/">#html</a> <a href="/tags/javascript/">#javascript</a> <a href="/tags/ganache/">#ganache</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/blockchain/">blockchain</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                <!-- 字数和阅读量 -->
+                <span class="post-count" style="font-size: 16px">字数：5.7k&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span id="busuanzi_container_page_pv" style="font-size: 16px">阅读量：<span id="busuanzi_value_page_pv"></span></span>
+
+
+                <h1 id="ETHEREUM-PET-SHOP"><a href="#ETHEREUM-PET-SHOP" class="headerlink" title="ETHEREUM PET SHOP"></a>ETHEREUM PET SHOP</h1><p>本文翻译至：<a href="https://truffleframework.com/tutorials/pet-shop" target="_blank" rel="noopener">https://truffleframework.com/tutorials/pet-shop</a> 版本为：2017-07-20</p>
+<p>本教程将构建一个名为 “宠物商店追踪系统” 的 dapp</p>
+<p>本教程需要对以太坊和智能合约有一定的基础，了解 Html 和 JavaScript</p>
+<blockquote>
+<p>注意：关于以太坊基本内容，可以阅读 <a href="https://truffleframework.com/tutorials/ethereum-overview" target="_blank" rel="noopener">Ethereum Overview</a></p>
+</blockquote>
+<p>本教程将会覆盖：</p>
+<ol>
+<li><p>设置开发环境</p>
+</li>
+<li><p>使用 Truffle Box 创建 Truffle 项目</p>
+</li>
+<li><p>编写智能合约</p>
+</li>
+<li><p>编译和移植智能合约</p>
+</li>
+<li><p>测试智能合约</p>
+</li>
+<li><p>创建与智能合约交互的用户界面</p>
+</li>
+<li><p>在浏览器中与dapp交互</p>
+</li>
+</ol>
+<h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>pete 的宠物商店想要用以太坊记录他们宠物的收养人。商店在一次可以容纳16只宠物，并且他们有一个宠物数据库。 pete 想要一个将已领养的宠物同以太坊地址联系起来的dapp。</p>
+<p>网站结构和风格已经给出。我们的工作是编写智能合约和前端逻辑进行使用。</p>
+<h2 id="2-设置开发环境"><a href="#2-设置开发环境" class="headerlink" title="2. 设置开发环境"></a>2. 设置开发环境</h2><p>在开始之前需要一些技术依赖。请安装如下：</p>
+<ul>
+<li><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js v6+ LTS and npm</a></p>
+</li>
+<li><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></p>
+</li>
+</ul>
+<p>之后，输入命令安装Truffle：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g truffle</span><br></pre></td></tr></table></figure>
+<p>为了验证truffle是否正确安装，终端输入 <code>truffle version</code>。如果有错，请确保npm模块已添加至路径</p>
+<p>我们也将使用 <a href="https://truffleframework.com/ganache" target="_blank" rel="noopener">Ganache</a> 。Ganache是用于以太坊开发的个人区块链，可以使用它部署合约、开发应用和运行测试。下载链接为 <a href="http://truffleframework.com/ganache" target="_blank" rel="noopener">http://truffleframework.com/ganache</a></p>
+<blockquote>
+<p>注意：如果你的开发环境中没有图形界面，你也可以使用Truffle Develop。Truffle内嵌有个人区块链。你需要修改一些设置，如区块链运行的端口，以适应Truffle Develop</p>
+</blockquote>
+<h2 id="3-使用Truffle-Box创建Truffle项目"><a href="#3-使用Truffle-Box创建Truffle项目" class="headerlink" title="3. 使用Truffle Box创建Truffle项目"></a>3. 使用Truffle Box创建Truffle项目</h2><ol>
+<li><p>初始化当前目录。首先在你当前文件夹下创建一个目录，然后移动到该目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir pet-shop-tutorial</span><br><span class="line"></span><br><span class="line">cd pet-shop-tutorial</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我们为了本教程已经创建了一个叫 <code>pet-shop</code> 的 <a href="https://truffleframework.com/boxes" target="_blank" rel="noopener">Truffle Box</a>, 它包括基本的项目结构以及用户界面代码。使用 <code>truffle unbox</code> 命令解包 Truffle Box</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle unbox pet-shop</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：Truffle有几种不同的初始化方法。另外一种使用命令 <code>truffle init</code>，它将创建一个空的没有样例合约在内的 Truffle 项目。获取更多消息，请参考 <a href="https://truffleframework.com/docs/getting_started/project" target="_blank" rel="noopener">Creating a project</a></p>
+</blockquote>
+<h3 id="3-1-目录结构"><a href="#3-1-目录结构" class="headerlink" title="3.1 目录结构"></a>3.1 目录结构</h3><p>Truffle默认目录结构如下：</p>
+<ul>
+<li><p><code>contracts/</code>：包含用于智能合约的 <a href="https://solidity.readthedocs.io/" target="_blank" rel="noopener">Solidity</a> 资源文件。其中有一个非常重要的合约 <code>Migrations.sol</code>，我们之后会谈论到</p>
+</li>
+<li><p><code>migrations/</code>：Truffle 使用移植系统来处理智能合约部署。移植是一个特殊的智能合约，用于追踪智能合约的变化</p>
+</li>
+<li><p><code>test/</code>：包含用于测试智能合约的 JavaScript 和 Solidity 文件</p>
+</li>
+<li><p><code>truffle-config.js</code>：Truffle 配置文件</p>
+</li>
+</ul>
+<p><code>pet-shop</code> Truffle Box 中有其它的文件和文件夹，但是我们现阶段不用担心</p>
+<h2 id="4-编写智能合约"><a href="#4-编写智能合约" class="headerlink" title="4. 编写智能合约"></a>4. 编写智能合约</h2><p>我们将编写智能合约，用于扮演dapp的后端逻辑和存储</p>
+<ol>
+<li><p>在 <code>contracts/</code> 目录中创建 <code>Adoption.sol</code> 文件</p>
+</li>
+<li><p>文件中添加如下内容：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.5.0;</span><br><span class="line"></span><br><span class="line">contract Adoption &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<ul>
+<li><p><code>pragma solidity ^0.5.0;</code> 表示所需 Solidity 的最小版本。 <code>pragma</code> 指的是 <em>“additional information that only the compiler cares about”</em>，而符号 <code>^</code> 指的是 <em>“the version indicated or higher”</em></p>
+</li>
+<li><p>类似 JavaScript 或者 PHP，以分号作为结尾</p>
+</li>
+</ul>
+<h2 id="4-1-变量设置"><a href="#4-1-变量设置" class="headerlink" title="4.1 变量设置"></a>4.1 变量设置</h2><p>Solidity 是静态类型语言，所以像 strings 、integers 和 arrays 等数据类型必须定义。 Solidity 有一个特殊的数据类型 <strong>address</strong> 。address 指的是以太坊地址，长度为20字节。以太坊区块链上的每一个帐号和智能合约都有一个地址，可以用来发送和接收以太。</p>
+<ol>
+<li>在 <code>contract Adoption {</code> 后一行添加如下变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">address[16] public adopters;</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<ul>
+<li><p>我们定义单个变量：adopters。这是一个以太坊地址数组。数组类型 <code>address</code> ，长度 <code>16</code> ，</p>
+</li>
+<li><p>你可以发现 <code>adopters</code> 有 public属性 。 <strong>Public</strong> 属性对应的变量有自带的 getter 方法，但是在数组的情况下需要传入一个关键值(数组索引下标)，并且只能返回一个值。我们将写一个函数用于返回整个数组，以便在 UI 中使用。</p>
+</li>
+</ul>
+<h2 id="4-2-第一个函数：Adopting-a-pet"><a href="#4-2-第一个函数：Adopting-a-pet" class="headerlink" title="4.2 第一个函数：Adopting a pet"></a>4.2 第一个函数：Adopting a pet</h2><p>用户可以提出收养宠物的请求</p>
+<ol>
+<li>在变量声明的下面添加如下函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Adopting a pet</span><br><span class="line">function adopt(uint petId) public returns (uint) &#123;</span><br><span class="line">  require(petId &gt;= 0 &amp;&amp; petId &lt;= 15);</span><br><span class="line"></span><br><span class="line">  adopters[petId] = msg.sender;</span><br><span class="line"></span><br><span class="line">  return petId;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<ul>
+<li><p>在 Solidity 中，函数参数和输出参数的类型都必须事先被指定。本例中，我们传入一个整型参数 <code>petId</code> ，并且返回一个整型数字。</p>
+</li>
+<li><p>我们需要确保 <code>petId</code> 在我们 <code>adopters</code> 数组的范围内。Solidity 中，数组索引从 0 开始，所以 ID 值为 0 — 15 。我们使用 <code>require()</code> 确保 <code>ID</code> 在范围内。</p>
+</li>
+<li><p>如果 <code>ID</code> 在范围内，我们使用 <code>adopters</code> 数组。调用当前函数的个人或者智能合约的地址将被作为 <code>msg.sender</code> 保存。</p>
+</li>
+<li><p>最后，我们返回 <code>petId</code> 作为确认。</p>
+</li>
+</ul>
+<h2 id="4-3-第二个函数：Retrieving-the-adopters"><a href="#4-3-第二个函数：Retrieving-the-adopters" class="headerlink" title="4.3 第二个函数：Retrieving the adopters"></a>4.3 第二个函数：Retrieving the adopters</h2><p>从 4.1 部分我们可知，数组的 getters 方法将通过给定的数组下标返回数组的单个值。我们 UI 需要更新所有的宠物收养状态，但是进行 16 次 API 调用又不理想。所以我们下一步是编写返回整个数组的函数</p>
+<ol>
+<li>在 <code>adopt()</code> 方法后添加 <code>getAdopters</code> 函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Retrieving the adopters</span><br><span class="line">function getAdopters() public view returns (address[16] memory) &#123;</span><br><span class="line">  return adopters;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>因为 <code>adopters</code> 已经声明过，所以我们可以直接返回它。注意明确返回类型为 <code>address[16] memory</code> 。<code>memory</code> 指定变量的数据位置。</p>
+</li>
+<li><p>函数中 <code>view</code> 关键字表明该函数不会修改当前合约的状态。关于 <code>view</code> 更多的详细信息可以参考 <a href="https://solidity.readthedocs.io/en/latest/contracts.html#view-functions" target="_blank" rel="noopener">此处</a></p>
+</li>
+</ol>
+<h2 id="5-编译和移植智能合约"><a href="#5-编译和移植智能合约" class="headerlink" title="5. 编译和移植智能合约"></a>5. 编译和移植智能合约</h2><p>当前我们已经编写完智能合约，下一步将对其进行编译和移植</p>
+<p>Truffle 有一个叫 Truffle Develop 的内嵌式开发者控制台 (developer console) ，它可以生成一条用于开发的区块链，我们使用它进行测试和部署合约。它支持在控制台直接运行 Truffle 命令。本教程中，我们将使用 Truffle Develop 在合约上执行操作。</p>
+<h3 id="5-1-编译"><a href="#5-1-编译" class="headerlink" title="5.1 编译"></a>5.1 编译</h3><p>Solidity 是一门编译型语言，意味着我们需要编译 Solidity 为字节码以供以太坊虚拟机执行 (EVM)。可以把它想象成将人类可读的 Solidity 翻译成 EVM 理解的东西</p>
+<ol>
+<li>打开终端，并确保当前路径为 dapp 项目根路径：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle compile</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：如果你在 Windows 中运行命令时出现问题，请查看文档 <a href="https://truffleframework.com/docs/advanced/configuration#resolving-naming-conflicts-on-windows" target="_blank" rel="noopener">resolving naming conflicts on Windows</a></p>
+</blockquote>
+<p>你应该会看到和下面相似的输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Compiling ./contracts/Migrations.sol...</span><br><span class="line">Compiling ./contracts/Adoption.sol...</span><br><span class="line">Writing artifacts to ./build/contracts</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-移植"><a href="#5-2-移植" class="headerlink" title="5.2 移植"></a>5.2 移植</h3><p>现在我们已经成功的编译了合约，是时候将它们移植至区块链了</p>
+<p><strong>移植是一个部署脚本，用于更改应用合约的状态</strong>，将合约从一个状态移动至另一个状态。对于第一次移植，你或许只是部署新代码，但是随着时间的推移，其它移植可能会移动数据或用新代码替换合约</p>
+<blockquote>
+<p>注意：阅读更多有关移植 <a href="https://truffleframework.com/docs/getting_started/migrations" target="_blank" rel="noopener">Truffle documentation</a></p>
+</blockquote>
+<p>当前 <code>migrations/</code> 目录中已经有一个 JavaScript 文件：<code>1_initial_migration.js</code>。它用于部署 <code>Migrations.sol</code> 合约来观察随后其它智能合约的部署，并且确保未来我们不会二次移植无变化修改的合约。</p>
+<p>现在我们准备创建我们自己的移植脚本。</p>
+<ol>
+<li><p>在 <code>migtations/</code> 目录中创建 <code>2_deploy_contracts.js</code> 文件</p>
+</li>
+<li><p>在 <code>2_deploy_contracts.js</code> 文件中添加如下内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Adoption = artifacts.require(<span class="string">"Adoption"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">deployer</span>) </span>&#123;</span><br><span class="line">  deployer.deploy(Adoption);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在我们移植合约至区块链之前，我们需要运行一个区块链。本教程我们会使用 <a href="https://truffleframework.com/ganache" target="_blank" rel="noopener">Ganache</a>，一个用于以太坊开发的个人区块链，利用它部署合约，开发应用和运行测试。如果你还没有安装，可以 <a href="https://truffleframework.com/ganache" target="_blank" rel="noopener">下载</a>，然后双击图标运行软件。它将生成区块链，并运行在本地 7545 端口。</p>
+</li>
+</ol>
+<blockquote>
+<p>注意：阅读更多关于 Ganache <a href="https://truffleframework.com/docs/ganache/using" target="_blank" rel="noopener">Truffle documentation</a></p>
+</blockquote>
+<p>第一次运行 Ganache 如下图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzme31nhn7j31580khtgf.jpg" alt="2"></p>
+<ol start="4">
+<li>返回终端，移植合约至区块链</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle migrate</span><br></pre></td></tr></table></figure>
+<p>你应该看到如下相似输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">1_initial_migration.js</span><br><span class="line">  ======================</span><br><span class="line"></span><br><span class="line">     Deploying 'Migrations'</span><br><span class="line">     ----------------------</span><br><span class="line">     &gt; transaction hash:    0x3b558e9cdf1231d8ffb3445cb2f9fb01de9d0363e0b97a17f9517da318c2e5af</span><br><span class="line">     &gt; Blocks: 0            Seconds: 0</span><br><span class="line">     &gt; contract address:    0x5ccb4dc04600cffA8a67197d5b644ae71856aEE4</span><br><span class="line">     &gt; account:             0x8d9606F90B6CA5D856A9f0867a82a645e2DfFf37</span><br><span class="line">     &gt; balance:             99.99430184</span><br><span class="line">     &gt; gas used:            284908</span><br><span class="line">     &gt; gas price:           20 gwei</span><br><span class="line">     &gt; value sent:          0 ETH</span><br><span class="line">     &gt; total cost:          0.00569816 ETH</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     &gt; Saving migration to chain.</span><br><span class="line">     &gt; Saving artifacts</span><br><span class="line">     -------------------------------------</span><br><span class="line">     &gt; Total cost:          0.00569816 ETH</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  2_deploy_contracts.js</span><br><span class="line">  =====================</span><br><span class="line"></span><br><span class="line">     Deploying 'Adoption'</span><br><span class="line">     .............................</span><br><span class="line">     .............................</span><br></pre></td></tr></table></figure>
+<p>你可以看到移植按顺序被执行，以及每一个移植的信息</p>
+<ol start="5">
+<li>在 Ganache中，区块链的状态已经改变。现在区块链显示当前区块是 <code>4</code> ，但之前是 <code>0</code>。此外，第一个账户初始化时有 100 个 ether，但是现在只有 99.99 。因为移植需要开销。我们将在之后谈论更多关于交易开销。</li>
+</ol>
+<p>移植之后的 Ganache</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzmelqmzozj30x40cwgnx.jpg" alt="2"></p>
+<p>当前，你已经编写了第一个智能合约，并且将其部署至本地运行的区块链。现在是时候与智能合约进行交互以确保它是我们所想要的。</p>
+<h2 id="6-测试智能合约"><a href="#6-测试智能合约" class="headerlink" title="6. 测试智能合约"></a>6. 测试智能合约</h2><p>Truffle 可以非常灵活的进行智能合约测试，支持 JavaScript 和 Solidity 。本教程，我们使用 Solidity 编写测试。</p>
+<ol>
+<li><p>在 <code>test/</code> 目录中创建 <code>TestAdoption.sol</code> 文件。</p>
+</li>
+<li><p>在 <code>TestAdoption.sol</code> 文件中添加如下内容：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.5.0;</span><br><span class="line"></span><br><span class="line">import &quot;truffle/Assert.sol&quot;;</span><br><span class="line">import &quot;truffle/DeployedAddresses.sol&quot;;</span><br><span class="line">import &quot;../contracts/Adoption.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract TestAdoption &#123;</span><br><span class="line"> // The address of the adoption contract to be tested</span><br><span class="line"> Adoption adoption = Adoption(DeployedAddresses.Adoption());</span><br><span class="line"></span><br><span class="line"> // The id of the pet that will be used for testing</span><br><span class="line"> uint expectedPetId = 8;</span><br><span class="line"></span><br><span class="line"> //The expected owner of adopted pet is this contract</span><br><span class="line"> address expectedAdopter = address(this);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们用三个 import 开始合约：</p>
+<ul>
+<li><p><code>Assert.sol</code> ：提供各种测试断言。在测试中，<strong>断言检查诸如相等、不相等或空来返回通过/失败</strong>。 <a href="https://github.com/trufflesuite/truffle/tree/master/packages/truffle-core/lib/testing/Assert.sol">这里</a> 是 Truffle 中包含的断言完整列表。</p>
+</li>
+<li><p><code>DeployedAddresses.sol</code> ：当运行测试时，Truffle 将在被测试的区块链中部署新的合约实例。智能合约获得部署合约的地址。</p>
+</li>
+<li><p><code>Adoption.sol</code> ：我们想测试的智能合约</p>
+</li>
+</ul>
+<blockquote>
+<p>注意：前两个输入是引入的全局 Truflle 文件，不是 <code>truffle</code> 目录。 <code>test/</code> 目录中没有 <code>truffle</code> 目录。</p>
+</blockquote>
+<p>然后我们定义三个合约范围的变量：</p>
+<ul>
+<li><p>首先，一个包含要测试的智能合约，调用 DeployedAddresses 智能合约来获取其地址</p>
+</li>
+<li><p>第二，设置测试 adoption 函数的宠物 ID</p>
+</li>
+<li><p>第三，由于 TestAdoption 合约将发送交易，我们设置 expectedAdoption (预期的收养人) 地址为 <strong>This</strong> (就是 TestAdoption 合约部署时分配的地址)，一个合约范围的变量获取当前合约的地址</p>
+</li>
+</ul>
+<h3 id="6-1-测试-adopt-函数"><a href="#6-1-测试-adopt-函数" class="headerlink" title="6.1 测试 adopt() 函数"></a>6.1 测试 adopt() 函数</h3><p>为了测试 <code>adopt()</code> 函数，我们需要知道的是一旦它执行成功，它将返回给定的 <code>petId</code> 。我们可以比较 <code>adopt()</code> 方法的返回值与我们传入的 ID 值是否相等</p>
+<ol>
+<li>在 <code>TestAdoption.sol</code> 智能合约的 <code>adoption</code> 变量声明之后添加如下函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Testing the adopt() function</span><br><span class="line">function testUserCanAdoptPet() public &#123;</span><br><span class="line">  uint returnedId = adoption.adopt(expectedPetId);</span><br><span class="line"></span><br><span class="line">  Assert.equal(returnedId, expectedPetId, &quot;Adoption of the expected pet should match what is returned.&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码讲解：</p>
+<ul>
+<li><p>我们用 <code>expectedPetId</code> 调用函数</p>
+</li>
+<li><p>最后，我们传递真实值、预期值和一条失败信息至 <code>Assert.equal()</code>。其中失败信息是当真实值和预期值不相等时输出到控制台的消息。</p>
+</li>
+</ul>
+<h3 id="6-2-测试检索单个宠物主人"><a href="#6-2-测试检索单个宠物主人" class="headerlink" title="6.2 测试检索单个宠物主人"></a>6.2 测试检索单个宠物主人</h3><p>之前我们说过 public 变量有自带的 getter 方法，我们可以检索 6.1 中 adoption 测试所存储的地址。在测试阶段已存储的数据都是有效的，所以宠物 <code>expectedPetId</code> 的收养数据可用于其它测试。</p>
+<ol>
+<li><code>TestAdoption.sol</code> 文件中，在 6.1 添加的函数后面添加如下函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Testing retrieval of a single pet&apos;s owner</span><br><span class="line">function testGetAdopterAddressByPetId() public &#123;</span><br><span class="line">  address adopter = adoption.adopters(expectedPetId);</span><br><span class="line"></span><br><span class="line">  Assert.equal(adopter, expectedAdopter, &quot;Owner of the expected pet should be this contract&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获得 adoption 合约中存储的收养人地址后，我们按照 6.1 中同样的方法进行相等断言测试</p>
+<h3 id="6-3-测试检索所有宠物主人"><a href="#6-3-测试检索所有宠物主人" class="headerlink" title="6.3 测试检索所有宠物主人"></a>6.3 测试检索所有宠物主人</h3><p>因为数组可以由给定的单个键返回单个值，所以我们创建了获得整个数组的getter方法</p>
+<ol>
+<li>在 6.2 添加的函数后面写入下面函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// Testing retrieval of all pet owners</span><br><span class="line">function testGetAdopterAddressByPetIdInArray() public &#123;</span><br><span class="line">  // Store adopters in memory rather than contract&apos;s storage</span><br><span class="line">  address[16] memory adopters = adoption.getAdopters();</span><br><span class="line"></span><br><span class="line">  Assert.equal(adopters[expectedPetId], expectedAdopter, &quot;Owner of the expected pet should be this contract&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意 <code>adopters</code> 变量的 <strong>memory</strong> 属性。 memory 属性告诉 Solidity 将值暂时存储在内存中，而不是将它保存至合约的存储中。因为 <code>adopters</code> 是一个数组，我们知道宠物 <code>expectedPetId</code> 的收养人地址，所以我们用宠物 <code>expectedPetId</code> 的收养人地址和数组中对应 <code>expectedPetId</code> 下标的值进行对比。</p>
+<h3 id="6-4-运行测试"><a href="#6-4-运行测试" class="headerlink" title="6.4 运行测试"></a>6.4 运行测试</h3><ol>
+<li>回到终端，运行测试：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle test</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>如果所有测试通过，你将看到终端输出如下相似内容：</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzmirz9nnjj30dm06m3yt.jpg" alt="2"></p>
+<p>此时 <code>ganache</code> 的相关状态变为：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzmittfesij30ww0cracd.jpg" alt="3"></p>
+<h2 id="7-创建与智能合约交互的用户界面"><a href="#7-创建与智能合约交互的用户界面" class="headerlink" title="7. 创建与智能合约交互的用户界面"></a>7. 创建与智能合约交互的用户界面</h2><p>现在我们已经创建了智能合约，并在本地的测试链上进行了部署，而且通过控制台验证了可以和它进行交互，是时候创建一个 UI ，以便于 Pete 来使用他的宠物商店。</p>
+<p>pet-shop Truffle Box 包含应用程序的前端代码。代码在 <code>src/</code> 目录下</p>
+<p>前端无法使用编译系统 (webpack，grunt 等) 来尽可能简单的启动。应用程序的结构已经存在，我们将补充特定于以太坊的函数。这样，你就可以掌握这些知识并将其应用到你自己的前端开发中。</p>
+<h3 id="7-1-实例化web3"><a href="#7-1-实例化web3" class="headerlink" title="7.1 实例化web3"></a>7.1 实例化web3</h3><ol>
+<li><p>在文本编辑器中打开 <code>/src/js/app.js</code></p>
+</li>
+<li><p>检查该文件。注意这里有一个全局 <code>App</code> 对象管理我们的应用，在 <code>init()</code> 中加载 pet 数据，然后调用函数 <code>initweb3()</code>。<a href="https://github.com/ethereum/web3.js/">web3 JavaScript library</a> 同以太坊区块链进行交互。它可以检索用户账户、发送交易、同智能合约交互以及其它。</p>
+</li>
+<li><p>从 <code>initweb3</code> 中移除多行内容，并且替换成如下：</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Modern dapp browsers...</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.ethereum) &#123;</span><br><span class="line">  App.web3Provider = <span class="built_in">window</span>.ethereum;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// Request account access</span></span><br><span class="line">    <span class="keyword">await</span> <span class="built_in">window</span>.ethereum.enable();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="comment">// User denied account access...</span></span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">"User denied account access"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Legacy dapp browsers...</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.web3) &#123;</span><br><span class="line">  App.web3Provider = <span class="built_in">window</span>.web3.currentProvider;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// If no injected web3 instance is detected, fall back to Ganache</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  App.web3Provider = <span class="keyword">new</span> Web3.providers.HttpProvider(<span class="string">'http://localhost:7545'</span>);</span><br><span class="line">&#125;</span><br><span class="line">web3 = <span class="keyword">new</span> Web3(App.web3Provider);</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<ul>
+<li><p>首先，我们检查是否使用新版的 dapp 浏览器或 <a href="https://github.com/MetaMask">MetaMask</a>，其中将 <code>ethereum</code> Provider 注入至 <code>window</code> 对象。如果是的话，我们使用它来创建我们 web3 对象，此外我们也需要 <code>ethereum.enable()</code> 显式请求访问帐户</p>
+</li>
+<li><p>如果 <code>ethereum</code> 对象不存在，我们将检查注入的 <code>web3</code> 实例。如果存在，则表示我们正在使用老版本的dapp 浏览器 (如 <a href="https://github.com/ethereum/mist">Mist</a> 或 MetaMask 的老版本)。如果是这样的话，我们获得它的 provoder 并且使用它创建我们的 web3 对象。</p>
+</li>
+<li><p>如果没有注入的 web3 实例，我们可以基于本地的 provider 创建 web3 对象。(这种备用方案使用于开发环境，但不安全且不适合生产)</p>
+</li>
+</ul>
+<h3 id="7-2-实例化合约"><a href="#7-2-实例化合约" class="headerlink" title="7.2 实例化合约"></a>7.2 实例化合约</h3><p>现在我们可以通过 web3 和以太坊交互，我们需要实例化智能合约以便于 web3 可以发现和调用它。Truffle 有一个 <code>truffle-contract</code> 可以帮助做到这一步。它使合同信息与移植保持同步，因此您无需手动更改合同的部署地址。</p>
+<ol>
+<li><code>/src/js/app.js</code> 文件，移除 <code>initContract</code> 中的多行内容并且替换成如下内容：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON(<span class="string">'Adoption.json'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Get the necessary contract artifact file and instantiate it with truffle-contract</span></span><br><span class="line">  <span class="keyword">var</span> AdoptionArtifact = data;</span><br><span class="line">  App.contracts.Adoption = TruffleContract(AdoptionArtifact);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Set the provider for our contract</span></span><br><span class="line">  App.contracts.Adoption.setProvider(App.web3Provider);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Use our contract to retrieve and mark the adopted pets</span></span><br><span class="line">  <span class="keyword">return</span> App.markAdopted();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<ul>
+<li><p>首先为智能合约检索生成文件。<strong>生成文件有大量关于合约的信息，如部署地址和程序应用二进制接口(ABI)。 ABI 是一个 JavaScript 对象，它定义如何同合约进行交互，包括合约变量、函数和相关参数</strong></p>
+</li>
+<li><p>一旦我们回调中有生成文件，我们就将它传递给 <code>TruffleContract()</code> 函数。这会创建一个我们可以与之交互的合约实例。</p>
+</li>
+<li><p>合约实例化之后，我们使用 <code>App.web3Provider</code> 值设置它的 web3 provider。</p>
+</li>
+<li><p>然后调用应用程序的 <code>markAdopted()</code> 函数，以防宠物在之前已被领养。我们已经将它封装为一个独立的函数，因为我们需要在修改智能约合数据后更新 UI 。</p>
+</li>
+</ul>
+<h3 id="7-3-获取已领养宠物，更新-UI"><a href="#7-3-获取已领养宠物，更新-UI" class="headerlink" title="7.3 获取已领养宠物，更新 UI"></a>7.3 获取已领养宠物，更新 UI</h3><ol>
+<li><code>/src/js/app.js/</code> 文件，移除 <code>markAdopted</code> 文件中多行内容，替换成如下：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> adoptionInstance;</span><br><span class="line"></span><br><span class="line">App.contracts.Adoption.deployed().then(<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>) </span>&#123;</span><br><span class="line">  adoptionInstance = instance;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> adoptionInstance.getAdopters.call();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">adopters</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; adopters.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (adopters[i] !== <span class="string">'0x0000000000000000000000000000000000000000'</span>) &#123;</span><br><span class="line">      $(<span class="string">'.panel-pet'</span>).eq(i).find(<span class="string">'button'</span>).text(<span class="string">'Success'</span>).attr(<span class="string">'disabled'</span>, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err.message);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<ul>
+<li><p>我们访问已部署的 <code>Adoption</code> 合约，然后在这个实例上调用 <code>getAdopters()</code> 方法</p>
+</li>
+<li><p>首先我们在智能合约调用之外声明变量 <code>adoptionInstance</code> 变量。以便在最初检索它之后可以访问该实例</p>
+</li>
+<li><p>call() 方法允许不用发送完整交易就可以从区块链上读取数据，意味着我们不需要花费任何 ether</p>
+</li>
+<li><p>调用 <code>getAdopters()</code> 之后，我们循环遍历 adopters ，检查每个宠物是否已被领养。因为数组是 address 类型，以太坊初始化数组为16个空的 addresses。这就是为什么我们检查空地址串而不是 null 或其它 falsey 值</p>
+</li>
+<li><p>一旦发现 <code>petId</code> 对应的地址不为空地址，我们就 disable 它的收养按钮，并且修改按钮 text 为 “Success” ，以便于用户得到反馈</p>
+</li>
+<li><p>出现的任何错误会显示在控制台</p>
+</li>
+</ul>
+<h3 id="7-4-处理-adopt-函数"><a href="#7-4-处理-adopt-函数" class="headerlink" title="7.4 处理 adopt() 函数"></a>7.4 处理 adopt() 函数</h3><ol>
+<li><code>/src/js/app.js/</code> 文件，移除 <code>handleAdopt</code> 文件中多行内容，替换成如下：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> adoptionInstance;</span><br><span class="line"></span><br><span class="line">web3.eth.getAccounts(<span class="function"><span class="keyword">function</span>(<span class="params">error, accounts</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (error) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> account = accounts[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">  App.contracts.Adoption.deployed().then(<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>) </span>&#123;</span><br><span class="line">    adoptionInstance = instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Execute adopt as a transaction by sending account</span></span><br><span class="line">    <span class="keyword">return</span> adoptionInstance.adopt(petId, &#123;<span class="attr">from</span>: account&#125;);</span><br><span class="line">  &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> App.markAdopted();</span><br><span class="line">  &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err.message);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>代码解读：</p>
+<ul>
+<li><p>我们使用 web3 获取用户账号。在错误检测之后，我们选择账户的第一个账号</p>
+</li>
+<li><p>这里，我们像之前一样获取已部署的合约，并且将实例存储为 <code>adoptionInstance</code>。接下来，我们将发送一个交易而不是调用。交易需要一个 from” 地址，并且需要 cost 。 cost 就是指用 ether 交付，称作为 gas 。 gas 花费是在智能合约上执行计算或存储数据所需的费用。我们通过执行 <code>adopt()</code> 函数发送交易，该函数需要 宠物 ID 和包含账号地址的对象，这个对象就是 <code>account</code>。</p>
+</li>
+<li><p>发送交易的结果是交易对象。如果没有错误，我们会调用 <code>markAdopted()</code> 函数将最新的存储数据同步至 UI</p>
+</li>
+</ul>
+<h2 id="8-在浏览器中和-dapp-交互"><a href="#8-在浏览器中和-dapp-交互" class="headerlink" title="8. 在浏览器中和 dapp 交互"></a>8. 在浏览器中和 dapp 交互</h2><p>现在我们准备使用 dapp</p>
+<h3 id="8-1-安装和配置-MetaMask"><a href="#8-1-安装和配置-MetaMask" class="headerlink" title="8.1 安装和配置 MetaMask"></a>8.1 安装和配置 MetaMask</h3><p>浏览器中和 dapp 交互最简单的方式是通过 <a href="https://metamask.io/" target="_blank" rel="noopener">MetaMask</a>，适用于 Chrome 和 Firefox 的扩展插件</p>
+<ol>
+<li><p>在浏览器中安装 MetaMask</p>
+</li>
+<li><p>安好后，你可以在地址栏看见 MetaMask 狐狸图标。点击图标，出现如下：</p>
+</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzn73x330hj30es0kugnt.jpg" alt="2"></p>
+<ol start="3">
+<li><p>点击 accept</p>
+</li>
+<li><p>然后你将看见使用细则。阅读之后，滚动至底端，然后点击 Accept</p>
+</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzn766xw8rj30eq0ktabp.jpg" alt="2"></p>
+<ol start="5">
+<li>现在你将看见最初的 MetaMask 。点击 Import Existing DEN</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzn77x42whj30eq0kpab8.jpg" alt="2"></p>
+<ol start="6">
+<li>在方框中标记 Wallet Seed，输入 Ganache 中出现的助记符</li>
+</ol>
+<p>助记符如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fznjkn2rftj30s90dmdmt.jpg" alt="3"></p>
+<blockquote>
+<p>警告：不要在 main Ethreum network 上使用此助记符。如果你发送 ETH 给任何由此助记符生成的账号，你将会失去它。</p>
+</blockquote>
+<p>在下面输入密码，点击 OK</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzn7de8dqtj30em0kf75j.jpg" alt="2"></p>
+<ol start="7">
+<li>现在我们需要将 MetaMask 链接至由 Ganache 生成的区块链上。点击显示 “Main Network” 的菜单，选择 Custom RPC</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fzn7g2tpu0j30em0kdwh5.jpg" alt="2"></p>
+<ol start="8">
+<li>在标题为 “New RPC URL” 的框中输入 <code>http://127.0.0.1:7545</code> 并单击 Sava</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrly1fzn7kmb8s5j30es0krgoa.jpg" alt="2"></p>
+<p>顶部的网络名将转换为 “Private Network”</p>
+<ol start="9">
+<li>点击 “Setting” 旁边的向左箭头关闭当前页面，返回到 Accounts 页面</li>
+</ol>
+<p>每一个由 Ganache 创建的账号都有 100 ether。 你会发现第一个账号略微少于 100 ，因为当合约部署和测试时消耗了一部分 gas</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrgy1fznjmq9mdkj309q0gbaay.jpg" alt="3"></p>
+<p>配置完成</p>
+<h3 id="8-3-安装和配置-lite-server"><a href="#8-3-安装和配置-lite-server" class="headerlink" title="8.3 安装和配置 lite-server"></a>8.3 安装和配置 lite-server</h3><p>我们现在可以启动本地 web 服务器，使用 dapp。 我们将使用 <code>lite-server</code> 包来服务我们的静态文件。</p>
+<ol>
+<li>在文本编辑器中打开 <code>bs-config.json</code> ，检查内容：</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"server"</span>: &#123;</span><br><span class="line">    <span class="attr">"baseDir"</span>: [<span class="string">"./src"</span>, <span class="string">"./build/contracts"</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这告诉 <code>lite-server</code> 那些文件包含在我们基目录中。我们为我们网站文件添加 <code>./src</code> 目录，为合约文件添加 <code>./build/contracts</code> 目录</p>
+<p>我们也在 <code>package.json</code> 文件中对 <code>script</code> 对象添加了 <code>dev</code> 命令。<code>script</code> 对象允许我们将控制台命令别名为单个 npm 命令。在这种情况下，我们只是执行一个命令，但可能有更复杂的配置。 你应该看到如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "dev": "lite-server",</span><br><span class="line">  "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>这告诉 npm 运行我们本地安装的 <code>lite-server</code> ，当我们从终端执行 <code>npm run dev</code> 时</p>
+<h3 id="8-4-使用-dapp"><a href="#8-4-使用-dapp" class="headerlink" title="8.4 使用 dapp"></a>8.4 使用 dapp</h3><ol>
+<li>启动本地 web 服务：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<p>dev 服务器将运行，自动打开包含 dapp 的新浏览器页面</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrly1fzn9kespdij30l30iogur.jpg" alt="2"></p>
+<ol start="2">
+<li><p>使用 dapp，点击你所选择宠物对应的 Adopt 按钮</p>
+</li>
+<li><p>MetaMask 将会自动提示你批准该交易。点击 Submit 批准该交易</p>
+</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrly1fzn9o70yj7j30eq0kkju9.jpg" alt="2"></p>
+<ol start="4">
+<li>你将发现之前的 adopted 按钮变成了 “Success”，并且无法继续点击，因为该宠物已经被领养。</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrly1fzn9q9jwwhj30dq0hon1n.jpg" alt="3"></p>
+<blockquote>
+<p>注意：如果按钮没有自动变为 “Success” ，请刷新浏览器</p>
+</blockquote>
+<p>在 MetaMask 中，你将发现交易列表：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006alGmrly1fzn9rweajpj30eq0km3zt.jpg" alt="2"></p>
+<p>你也可以发现 Ganache 中有同样的交易列表</p>
+<p>恭喜！你在成为全栈 dapp 开发师的路上迈出了一大步。对于本地开发，您拥有开始制作更高级 dapp 所需的所有工具。如果您想让其他人使用 dapp ，请继续关注我们将来部署到 Ropsten testnet 的教程。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/sulenn/sulenn.github.io" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://weibo.com/u/5649728079" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="mailto:273409891@qq.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                </ul>
+                
+                <p class="copyright text-muted">&copy; 2019 qiubing &nbsp;&nbsp;  <span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span></span> &nbsp;&nbsp; 总字数  <span class="post-count">26.6k</span><br></p>
+                <!-- <p class="copyright text-muted">
+                    <span id="busuanzi_container_site_pv">访问量<span id="busuanzi_value_site_pv"></span></span>
+                </p> -->
+                <p class="copyright text-muted">框架 <a target="_blank" href="https://hexo.io/zh-cn/">Hexo</a> &nbsp;&nbsp; 主题 <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog</a></p>
+                <!-- <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p> -->
+                <!-- <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
